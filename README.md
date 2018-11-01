@@ -8,13 +8,13 @@ Usecases:
 - I'm starting a new PR: I want to create a new branch on top of trunk and
   create a new git worktree for that branch
   ```shell
-  cd $(./autowt armael my-new-branch)
+  cd $(autowt armael my-new-branch)
   ```
 
 - I'm reviewing a PR from someone: I want to have a new git worktree with
   their branch in it.
   ```shell
-  cd $(./autowt someone their-branch)
+  cd $(autowt someone their-branch)
   ```
 
 ### Assumptions made by the script
@@ -38,7 +38,7 @@ The script assumes that it is run from a directory which contains:
 
 ### Behaviour
 
-`./autowt.exe username branch`
+`autowt username branch`
 
 `username` maps to a remote name. If it is `my_username` (set in the script), it
 maps to `origin`. Otherwise, it maps to the username, in lowercase.
