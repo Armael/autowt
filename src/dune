@@ -1,0 +1,4 @@
+(executable
+ (name autowt)
+ (libraries rresult bos base)
+ (preprocess (pps ppx_let)))
