@@ -8,6 +8,13 @@ module Let_syntax = struct
   let map x ~f = Rresult.R.(>>|) x f
 end
 
+(* Script settings *)
+
+let main_repo = "main"
+let my_username = "armael"
+
+(****)
+
 let run_quiet cmd =
   OS.Cmd.(in_null |> run_io cmd |> out_null |> success)
 
@@ -19,12 +26,11 @@ let add_remote remote =
   run_quiet Cmd.(v "git" % "remote" % "add" % remote % url)
 
 let main ~username ~branch =
-  (* Hackish *)
-  let remote = if username = "armael" then "origin" else
+  let remote = if username = my_username then "origin" else
       String.lowercase_ascii username
   in
   let%bind cwd = OS.Dir.current () in
-  let%bind main_dir = OS.Path.must_exist Fpath.(cwd / "main") in
+  let%bind main_dir = OS.Path.must_exist Fpath.(cwd / main_repo) in
   let%bind res = OS.Dir.with_current main_dir (fun () ->
     let%bind remotes = OS.Cmd.(run_out Cmd.(v "git" % "remote") |> to_lines) in
     let%bind () =
